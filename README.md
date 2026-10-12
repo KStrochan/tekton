@@ -6,20 +6,17 @@ Made-to-measure wardrobes, kitchens and shelving, built in our own workshop.
 
 ## Status
 
-In progress. The groundwork is done: brand colors and fonts, the contact form with Telegram delivery, metadata, tests and a Lighthouse check. The pages below are next.
+Live at https://tekton-seven.vercel.app
 
-Pages:
+What is built:
 
-- [ ] Home
-- [ ] Catalogue (6 pieces)
-- [ ] Configurator
-- [ ] How we work
-- [ ] Contact
+- Home: recent work, six starting-point pieces, materials, the making process and the workshop
+- Configurator (`/configurator`): type, sizes, material and front with a live scaled drawing, price, and a list of pieces kept for the session
+- Contact page (`/contact`) that receives the whole list as a quote request
 
-Features:
+Still to do:
 
-- [ ] Configurator (type, dimensions, material, front) with an estimated price
-- [ ] Client-side basket and a quote request sent to Telegram
+- [ ] Separate catalogue pages for each piece
 
 ## Design
 
@@ -73,11 +70,11 @@ Enquiries go to a Telegram chat. Copy `.env.example` to `.env.local` and fill in
 
 ## Deploying
 
-Import the repository in Vercel and add the two Telegram variables if the form should deliver leads. Update `url` in `content/site.ts` once the site has its final domain.
+Import the repository in Vercel and add the two Telegram variables if the form should deliver leads. If the domain changes, update `url` in `content/site.ts` and `tests/metadata.test.ts`.
 
 ## Credits
 
-Fonts are licensed under the SIL Open Font License; the license texts are in `app/fonts`. Photos will come from Unsplash and are credited in the site footer.
+Fonts are licensed under the SIL Open Font License; the license texts are in `app/fonts`. Photos are hotlinked from Unsplash and credited in the site footer.
 
 ## License
 
