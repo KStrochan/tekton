@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Blueprint } from "@/components/anim/Blueprint";
+import { Reveal } from "@/components/anim/Reveal";
 import { featured, materials, photos, pieces, steps } from "@/content/home";
 import { site } from "@/content/site";
 import { formatUsd } from "@/lib/pricing";
@@ -13,7 +15,10 @@ export default function HomePage() {
   return (
     <main id="main">
       <section className="site-grid gap-y-10 pb-20 pt-12 md:pt-20">
-        <h1 className="display col-span-12 max-w-[14ch]">Furniture built to the millimetre.</h1>
+        <div className="col-span-12 grid gap-5">
+          <h1 className="display max-w-[14ch]">Furniture built to the millimetre.</h1>
+          <div aria-hidden="true" className="ruler max-w-3xl" />
+        </div>
         <div className="col-span-12 grid content-start gap-6 md:col-span-4 md:pt-2">
           <p className="text-lg">
             Wardrobes, kitchens and shelving drawn for your room and made in our workshop in Eastport. No standard
@@ -49,14 +54,7 @@ export default function HomePage() {
             fetchPriority="high"
             className="col-span-8 aspect-[4/3] h-auto w-full bg-border object-cover md:col-span-6"
           />
-          <Image
-            src={unsplash(photos.hallway, 800)}
-            alt="Empty white room with built-in cabinets"
-            width={800}
-            height={1200}
-            sizes="(min-width: 768px) 20vw, 50vw"
-            className="col-span-4 hidden aspect-[2/3] h-auto w-full self-end bg-border object-cover md:col-span-2 md:block"
-          />
+          <Blueprint className="col-span-4 self-end sm:col-span-3 md:col-span-2" />
         </div>
       </section>
 
@@ -68,7 +66,10 @@ export default function HomePage() {
             configurator.
           </p>
           {featured.map((item, index) => (
-            <figure
+            <Reveal
+              as="figure"
+              variant="curtain"
+              delay={index * 0.15}
               key={item.title}
               className={index === 0 ? "col-span-12 md:col-span-7 md:row-span-2" : "col-span-12 md:col-span-5"}
             >
@@ -84,7 +85,7 @@ export default function HomePage() {
                 <span className="font-semibold">{item.title}</span>
                 <span className="text-muted">{item.note}</span>
               </figcaption>
-            </figure>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -101,7 +102,7 @@ export default function HomePage() {
             {pieces.map((piece) => (
               <li
                 key={piece.code}
-                className="grid grid-cols-[4rem_1fr_auto] gap-x-4 gap-y-1 border-t border-border py-5 last:border-b md:grid-cols-[5rem_1.3fr_1.3fr_auto]"
+                className="piece-row grid grid-cols-[4rem_1fr_auto] gap-x-4 gap-y-1 border-t border-border py-5 last:border-b md:grid-cols-[5rem_1.3fr_1.3fr_auto]"
               >
                 <span className="text-sm tabular-nums text-accent">{piece.code}</span>
                 <span className="text-lg font-semibold tracking-tight">{piece.name}</span>
@@ -125,12 +126,12 @@ export default function HomePage() {
             Materials
           </h2>
           <ul className="col-span-12 grid grid-cols-2 gap-6 md:col-span-8 md:grid-cols-4">
-            {materials.map((m) => (
-              <li key={m.name} className="grid gap-3">
-                <span aria-hidden="true" className="aspect-square border border-fg/20" style={{ background: m.swatch }} />
+            {materials.map((m, index) => (
+              <Reveal as="li" variant="curtain" delay={index * 0.12} key={m.name} className="grid gap-3">
+                <span aria-hidden="true" className="swatch aspect-square border border-fg/20" style={{ background: m.swatch }} />
                 <span className="font-semibold">{m.name}</span>
                 <span className="text-sm text-muted">{m.note}</span>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
@@ -141,11 +142,12 @@ export default function HomePage() {
           <h2 className="col-span-12 text-4xl font-semibold md:col-span-4 md:text-5xl">How a piece gets made</h2>
           <ol className="col-span-12 grid gap-8 sm:grid-cols-2 md:col-span-8">
             {steps.map((step, index) => (
-              <li key={step.title} className="grid content-start gap-2 border-t border-bg/30 pt-4">
+              <Reveal as="li" delay={index * 0.15} key={step.title} className="relative grid content-start gap-2 border-t border-bg/30 pt-4">
+                <span aria-hidden="true" className="grow-on-seen absolute -top-px left-0 h-0.5 w-full bg-accent" />
                 <span className="text-sm tabular-nums text-bg/60">Step {index + 1} of {steps.length}</span>
                 <h3 className="text-2xl font-semibold">{step.title}</h3>
                 <p className="text-bg/75">{step.text}</p>
-              </li>
+              </Reveal>
             ))}
           </ol>
         </div>

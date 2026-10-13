@@ -44,8 +44,8 @@ export default async function ContactPage({ searchParams }: Props) {
             </div>
           </dl>
           <Image
-            src={unsplash(photos.workshop, 900)}
-            alt="Carpenter working on a piece of wood in the workshop"
+            src={unsplash(photos.hallway, 900)}
+            alt="Empty white room with built-in cabinets, ready to be measured"
             width={900}
             height={600}
             sizes="(min-width: 768px) 40vw, 100vw"

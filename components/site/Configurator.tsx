@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useId, useMemo, useState, useSyncExternalStore } from "react";
+import { Odometer } from "@/components/anim/Odometer";
 import { Drawing } from "@/components/site/Drawing";
 import { clampSize, formatUsd, LIMITS, quote, type Front, type Material, type Piece, type PieceType } from "@/lib/pricing";
 
@@ -155,7 +156,9 @@ export function Configurator() {
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-fg pb-6" aria-live="polite">
           <div>
             <p className="text-sm text-muted">{describe(valid)}</p>
-            <p className="text-5xl font-semibold tracking-tight tabular-nums">{formatUsd(price)}</p>
+            <p className="text-5xl font-semibold tracking-tight tabular-nums">
+              <Odometer value={formatUsd(price)} />
+            </p>
           </div>
           <button type="button" className="btn-solid" onClick={() => saveItems([...items, { id: crypto.randomUUID(), piece: valid, price }])}>
             Add to my list
